@@ -1,0 +1,13 @@
+name: Quality Gate
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  api-tests:
+    uses: ./.github/workflows/api-tests.yml
+
+  e2e-tests:
+    uses: ./.github/workflows/e2e-tests.yml
