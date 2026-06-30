@@ -1,0 +1,8 @@
+com\michele\qa\factory\ProductFactory.class
+com\michele\qa\factory\LoginFactory.class
+com\michele\qa\dto\LoginResponse.class
+com\michele\qa\dto\Product.class
+com\michele\qa\dto\Basket.class
+com\michele\qa\config\Environment.class
+com\michele\qa\utils\JsonUtils.class
+com\michele\qa\dto\LoginRequest.class

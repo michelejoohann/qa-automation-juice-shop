@@ -1,0 +1,44 @@
+name: QA Automation CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      juice-shop:
+        image: bkimminich/juice-shop
+        ports:
+          - 3000:3000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Wait for Juice Shop
+        run: |
+          for i in {1..30}; do
+            curl -s http://localhost:3000 && break
+            sleep 3
+          done
+
+      - name: Run API Tests
+        run: |
+          cd api-tests
+          mvn test
+
+      - name: Upload API reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-reports
+          path: api-tests/target/surefire-reports

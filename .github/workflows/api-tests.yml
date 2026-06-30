@@ -1,0 +1,50 @@
+name: API Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      juice-shop:
+        image: bkimminich/juice-shop
+        ports:
+          - 3000:3000
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Wait for Juice Shop
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:3000 > /dev/null; then
+              echo "Juice Shop is ready"
+              exit 0
+            fi
+            echo "Waiting for Juice Shop..."
+            sleep 2
+          done
+          exit 1
+
+      - name: Run API Tests
+        run: |
+          cd api-tests/juice-shop-api
+          mvn clean test -Denv=dev
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: api-tests/juice-shop-api/target/allure-results

@@ -1,0 +1,17 @@
+{
+  "name": "e2e-tests-juice-shop",
+  "version": "1.0.0",
+  "description": "Testes E2E com Playwright e Cucumber para OWASP Juice Shop",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:headed": "cross-env HEADLESS=false cucumber-js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.9.0",
+    "@playwright/test": "^1.45.0",
+    "cross-env": "^7.0.3",
+    "playwright": "^1.45.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  }
+}
