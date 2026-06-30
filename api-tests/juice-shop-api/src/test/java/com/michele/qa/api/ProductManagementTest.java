@@ -76,4 +76,17 @@ public class ProductManagementTest extends BaseTest {
                 .statusCode(anyOf(is(404), is(405), is(500)))
                 .body(anything());
     }
+
+    @Test
+    @Story("Criação de produto autenticada")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Valida tentativa de criação de produto utilizando token de autenticação.")
+    @DisplayName("Deve tentar criar produto com autenticação")
+    void deveTentarCriarProdutoComAutenticacao() {
+        productService.criarProdutoAutenticadoComPayloadValido()
+                .then()
+                .statusCode(anyOf(is(200), is(201), is(401), is(403)))
+                .body(anything());
+    }
+
 }

@@ -1,8 +1,10 @@
 package com.michele.qa.client;
 
-import io.restassured.response.Response;
-
+import com.michele.qa.config.Endpoints;
 import com.michele.qa.dto.Product;
+import io.restassured.response.Response;
+import com.michele.qa.config.Constants;
+import com.michele.qa.config.TokenManager;
 
 import static io.restassured.RestAssured.given;
 
@@ -12,44 +14,52 @@ public class ProductClient {
         return given()
                 .queryParam("q", termo)
                 .when()
-                .get("/rest/products/search");
+                .get(Endpoints.PRODUCT_SEARCH);
     }
 
     public Response buscarProdutoPorId(int id) {
         return given()
                 .when()
-                .get("/api/Products/" + id);
+                .get(Endpoints.PRODUCTS + "/" + id);
     }
 
     public Response buscarProdutoInexistente() {
         return given()
-                .when()
-                .get("/api/Products/999999");
+            .when()
+            .get(Endpoints.PRODUCTS + "/" + Constants.INVALID_PRODUCT_ID);
     }
-
+    
     public Response criarProduto(Product produto) {
         return given()
                 .body(produto)
                 .when()
-                .post("/api/Products");
+                .post(Endpoints.PRODUCTS);
     }
 
     public Response atualizarProduto(int id, Product produto) {
         return given()
                 .body(produto)
                 .when()
-                .put("/api/Products/" + id);
+                .put(Endpoints.PRODUCTS + "/" + id);
     }
 
     public Response deletarProduto(int id) {
         return given()
                 .when()
-                .delete("/api/Products/" + id);
+                .delete(Endpoints.PRODUCTS + "/" + id);
     }
 
     public Response metodoInvalido() {
         return given()
                 .when()
-                .patch("/api/Products/1");
+                .patch(Endpoints.PRODUCTS + "/1");
+    }
+
+    public Response criarProdutoAutenticado(Product produto) {
+        return given()
+                .header("Authorization", "Bearer " + TokenManager.getToken())
+                .body(produto)
+                .when()
+                .post(Endpoints.PRODUCTS);
     }
 }

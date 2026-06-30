@@ -2,6 +2,7 @@ package com.michele.qa.service;
 
 import com.michele.qa.client.ProductClient;
 import com.michele.qa.factory.ProductFactory;
+
 import io.restassured.response.Response;
 
 public class ProductService {
@@ -39,4 +40,10 @@ public class ProductService {
     public Response chamarMetodoHttpInvalido() {
         return productClient.metodoInvalido();
     }
+
+    public Response criarProdutoAutenticadoComPayloadValido() {
+        return productClient.criarProdutoAutenticado(
+                ProductFactory.novoProduto()
+        );
+    }    
 }

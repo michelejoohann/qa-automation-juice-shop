@@ -6,6 +6,7 @@ import com.michele.qa.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.*;
+import com.michele.qa.config.Constants;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
@@ -39,11 +40,11 @@ public class ProductTest extends BaseTest {
     @Description("Busca produto por ID e retorna produto válido.")
     @DisplayName("Deve buscar produto por ID")
     void deveBuscarProdutoPorId() {
-        productService.buscarProdutoPorId(1)
+        productService.buscarProdutoPorId(Constants.PRODUCT_ID)
                 .then()
                 .statusCode(200)
                 .header("content-type", containsString("application/json"))
-                .body("data.id", equalTo(1))
+                .body("data.id", equalTo(Constants.PRODUCT_ID))
                 .body("data.name", notNullValue());
     }
 

@@ -1,6 +1,7 @@
 package com.michele.qa.factory;
 
 import com.michele.qa.dto.Product;
+
 import net.datafaker.Faker;
 
 public class ProductFactory {

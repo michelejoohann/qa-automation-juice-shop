@@ -1,5 +1,6 @@
 package com.michele.qa.client;
 
+import com.michele.qa.config.Endpoints;
 import com.michele.qa.dto.LoginRequest;
 import io.restassured.response.Response;
 
@@ -7,12 +8,10 @@ import static io.restassured.RestAssured.given;
 
 public class LoginClient {
 
-    private static final String LOGIN_ENDPOINT = "/rest/user/login";
-
-    public Response login(LoginRequest loginRequest) {
+    public Response login(LoginRequest request) {
         return given()
-                .body(loginRequest)
+                .body(request)
                 .when()
-                .post(LOGIN_ENDPOINT);
+                .post(Endpoints.LOGIN);
     }
 }
