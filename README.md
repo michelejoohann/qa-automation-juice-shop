@@ -1,92 +1,350 @@
-# QA Automation Juice Shop
+# 🚀 QA Automation Framework - OWASP Juice Shop
 
-Projeto-base para avaliação técnica de Automação de Testes usando OWASP Juice Shop.
+<p align="center">
 
-## Objetivo
+![Java](https://img.shields.io/badge/Java-17-red?style=for-the-badge&logo=openjdk)
+![Maven](https://img.shields.io/badge/Maven-3.9-blue?style=for-the-badge&logo=apachemaven)
+![JUnit5](https://img.shields.io/badge/JUnit-5-success?style=for-the-badge&logo=junit5)
+![RestAssured](https://img.shields.io/badge/RestAssured-API_Testing-success?style=for-the-badge)
+![Allure](https://img.shields.io/badge/Allure-Report-orange?style=for-the-badge)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI-blue?style=for-the-badge&logo=githubactions)
 
-Automatizar testes de API, E2E, carga e pipeline CI/CD simulando uma entrega de qualidade para ambiente produtivo.
+</p>
 
-## Aplicação alvo
+---
 
-OWASP Juice Shop
+# 📖 Sobre o Projeto
+
+Framework de automação de testes desenvolvido para a aplicação **OWASP Juice Shop**, utilizando Java e aplicando boas práticas de arquitetura para testes de API.
+
+O objetivo deste projeto é demonstrar conhecimentos em:
+
+- Automação de testes de API
+- Arquitetura de Frameworks de Teste
+- Boas práticas de Clean Code
+- Separação de responsabilidades
+- Integração Contínua (CI)
+- Relatórios automatizados
+
+---
+
+# 🎯 Objetivos
+
+Este projeto foi desenvolvido para servir como portfólio profissional e demonstra conhecimentos em:
+
+- RestAssured
+- JUnit 5
+- Maven
+- Allure Report
+- GitHub Actions
+- JSON Schema Validation
+- DTO Pattern
+- Factory Pattern
+- Service Layer
+- Client Layer
+
+---
+
+# 🛠 Tecnologias Utilizadas
+
+| Tecnologia | Finalidade |
+|------------|------------|
+| Java 17 | Linguagem principal |
+| Maven | Gerenciamento de dependências |
+| JUnit 5 | Framework de testes |
+| RestAssured | Testes de API |
+| Allure Report | Relatórios |
+| JSON Schema Validator | Validação de contratos |
+| DataFaker | Massa dinâmica |
+| GitHub Actions | Integração Contínua |
+| Docker | Execução da aplicação |
+
+---
+
+# 🏗 Arquitetura do Framework
+
+```text
+                    Test
+
+                      │
+
+                      ▼
+
+                  Service
+
+                      │
+
+                      ▼
+
+                   Client
+
+                      │
+
+                      ▼
+
+              Request Specifications
+
+                      │
+
+                      ▼
+
+                 REST API
+```
+
+Cada camada possui responsabilidade única:
+
+- **API** → Casos de teste
+- **Service** → Regras de negócio
+- **Client** → Comunicação com API
+- **RequestSpecs** → Configuração das requisições
+- **Config** → Ambientes, Endpoints, Headers e Token
+
+---
+
+# 📂 Estrutura do Projeto
+
+```text
+qa-automation-juice-shop
+│
+├── .github
+│   └── workflows
+│       └── api-tests.yml
+│
+├── api-tests
+│   └── juice-shop-api
+│       │
+│       ├── src
+│       │
+│       ├── test
+│       │   ├── api
+│       │   ├── base
+│       │   ├── client
+│       │   ├── config
+│       │   ├── dto
+│       │   ├── factory
+│       │   ├── fixtures
+│       │   ├── service
+│       │   ├── specs
+│       │   └── resources
+│       │       ├── environments
+│       │       └── schemas
+│       │
+│       └── pom.xml
+│
+├── docs
+│
+├── e2e-tests
+│
+├── performance-tests
+│
+└── README.md
+```
+
+---
+
+# ✅ Funcionalidades Implementadas
+
+## Login
+
+- Login válido
+- Login inválido
+- Login com senha em branco
+
+---
+
+## Produtos
+
+- Buscar produtos
+- Buscar produto por ID
+- Buscar produto inexistente
+
+---
+
+## Gerenciamento de Produtos
+
+- Criar produto
+- Criar produto autenticado
+- Criar produto inválido
+- Atualizar produto
+- Excluir produto
+- Método HTTP inválido
+
+---
+
+## Framework
+
+- DTO Pattern
+- Factory Pattern
+- TokenManager
+- Endpoints centralizados
+- Constants
+- Headers centralizados
+- Environment Manager
+- Request Specification
+- JSON Schema Validation
+- DataFaker
+
+---
+
+# 📋 Cobertura Atual
+
+| Módulo | Status |
+|---------|--------|
+| Login | ✅ |
+| Produtos | ✅ |
+| Gerenciamento | ✅ |
+| JSON Schema | ✅ |
+| Allure | ✅ |
+| GitHub Actions | ✅ |
+
+---
+
+# ▶ Como Executar
+
+## 1 - Clonar o projeto
+
+```bash
+git clone https://github.com/michelejoohann/qa-automation-juice-shop.git
+```
+
+---
+
+## 2 - Entrar na pasta
+
+```bash
+cd qa-automation-juice-shop/api-tests/juice-shop-api
+```
+
+---
+
+## 3 - Executar a aplicação
 
 ```bash
 docker run --rm -p 3000:3000 bkimminich/juice-shop
 ```
 
-Acesse:
+---
 
-```text
-http://localhost:3000
-```
-
-## Tecnologias utilizadas
-
-- Java 17
-- Maven
-- RestAssured
-- JUnit 5
-- Node.js
-- Playwright
-- Cucumber
-- K6
-- GitHub Actions
-
-## Estrutura do projeto
-
-```text
-qa-automation-juice-shop/
-├── api-tests/              # Testes automatizados de API com RestAssured
-├── e2e-tests/              # Testes E2E com Playwright + Cucumber
-├── performance-tests/      # Testes de carga com K6
-├── reports/                # Relatórios gerados
-├── evidences/              # Evidências, prints e artefatos
-├── docs/                   # Documentação complementar
-└── .github/workflows/      # Pipeline CI/CD
-```
-
-## Como executar os testes de API
-
-Com o Juice Shop rodando em `http://localhost:3000`:
+## 4 - Executar os testes
 
 ```bash
-cd api-tests
-mvn test
+mvn clean test
 ```
 
-## Como executar os testes E2E
+---
+
+## Executar por ambiente
 
 ```bash
-cd e2e-tests
-npm install
-npx playwright install
-npm test
+mvn clean test -Denv=dev
+
+mvn clean test -Denv=qa
+
+mvn clean test -Denv=hml
 ```
 
-O relatório HTML será gerado em:
+---
 
-```text
-reports/e2e-report.html
-```
+# 📊 Allure Report
 
-## Como executar teste de carga
+![Allure Report](docs/images/allure-report.png)
+
+Após a execução dos testes:
 
 ```bash
-k6 run performance-tests/k6-load-test.js
+allure serve target/allure-results
 ```
 
-## CI/CD
+O relatório apresenta:
 
-O projeto possui pipeline GitHub Actions em:
+- Cenários executados
+- Tempo de execução
+- Evidências
+- Status dos testes
+- Histórico
 
-```text
-.github/workflows/ci.yml
+---
+
+# 🔄 Integração Contínua
+
+O projeto possui pipeline utilizando **GitHub Actions**.
+
+A cada:
+
+- Push
+- Pull Request
+
+é executado automaticamente:
+
+```bash
+mvn clean test
 ```
 
-O pipeline executa os testes de API automaticamente a cada push ou pull request.
+---
 
-## Evidências
+# 📈 Roadmap
 
-- Resultados Maven/JUnit ficam em `api-tests/target/surefire-reports`.
-- Relatório Cucumber fica em `reports/e2e-report.html`.
-- Resultados do K6 aparecem no console e podem ser exportados conforme necessidade.
+## API
+
+- [x] Login
+- [x] Produtos
+- [x] CRUD Produtos
+- [x] JSON Schema
+- [x] TokenManager
+- [x] DataFaker
+- [ ] Basket
+- [ ] Orders
+- [ ] Address
+- [ ] Reviews
+
+---
+
+## UI
+
+- [ ] Playwright
+- [ ] Page Objects
+- [ ] Fixtures
+- [ ] Allure
+
+---
+
+## Performance
+
+- [ ] k6
+- [ ] JMeter
+
+---
+
+## DevOps
+
+- [ ] Docker Compose
+- [ ] Jenkins
+- [ ] SonarQube
+- [ ] Publicação automática do Allure
+
+---
+
+# 👩‍💻 Autora
+
+## Michèlé Joohann
+
+QA Engineer | Software Quality | Test Automation
+
+Especialista em:
+
+- Automação de Testes
+- APIs REST
+- Qualidade de Software
+- Processos de QA
+- Testes Funcionais
+- Testes Exploratórios
+
+GitHub:
+
+https://github.com/michelejoohann
+
+---
+
+# ⭐ Se este projeto foi útil
+
+Considere deixar uma ⭐ no repositório.

@@ -1,8 +1,15 @@
 module.exports = {
   default: {
     requireModule: ["ts-node/register"],
-    require: ["support/**/*.ts", "pages/**/*.ts", "steps/**/*.ts"],
-    format: ["progress", "html:../reports/e2e-report.html"],
-    timeout: 60000
+    require: [
+      "support/world.ts",
+      "support/hooks.ts",
+      "steps/**/*.ts"
+    ],
+    paths: ["features/**/*.feature"],
+    format: [
+      "progress",
+      "html:reports/cucumber-report.html"
+    ]
   }
 };
