@@ -11,3 +11,6 @@ jobs:
 
   e2e-tests:
     uses: ./.github/workflows/e2e-tests.yml
+
+  performance-tests:
+    uses: ./.github/workflows/performance-tests.yml
