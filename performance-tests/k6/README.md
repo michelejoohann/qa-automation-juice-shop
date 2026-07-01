@@ -56,6 +56,28 @@ Valida:
 
 ---
 
+## Stress Test
+
+Configuração:
+
+- 500 usuários virtuais
+- duração de 5 minutos
+
+Objetivo:
+
+- validar estabilidade
+- identificar gargalos
+- medir throughput
+
+Thresholds
+
+| Métrica | Valor |
+|----------|--------|
+| Taxa de erro | < 5% |
+| P95 | < 2000 ms |
+
+---
+
 # Endpoint testado
 
 ```http
@@ -111,6 +133,12 @@ Load Test
 docker run --rm -i -v ${PWD}/performance-tests/k6:/scripts grafana/k6 run --env BASE_URL=http://host.docker.internal:3000 /scripts/scripts/load-test.js
 ```
 
+Stress Test
+
+```bash
+docker run --rm -i -v ${PWD}/performance-tests/k6:/scripts grafana/k6 run --env BASE_URL=http://host.docker.internal:3000 /scripts/scripts/stress-test-500vus.js
+```
+
 ---
 
 # Executando localmente (k6 instalado)
@@ -156,3 +184,22 @@ Os testes são executados automaticamente pelo GitHub Actions através do workfl
 - Docker
 - GitHub Actions
 - OWASP Juice Shop
+
+---
+
+# Versões
+
+| Ferramenta | Versão |
+|------------|---------|
+| k6 | 2.x |
+| Docker | Latest |
+
+---
+
+# Cobertura
+
+| Cenário | Status |
+|----------|--------|
+| Smoke Test | ✅ |
+| Load Test | ✅ |
+| Stress Test | ✅ |

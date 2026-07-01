@@ -19,6 +19,19 @@ O objetivo é validar os principais serviços REST da aplicação, garantindo o 
 
 ---
 
+# Versões
+
+| Ferramenta | Versão |
+|------------|---------|
+| Java | 17 |
+| Maven | 3.9 |
+| RestAssured | 5.x |
+| JUnit | 5 |
+| Allure | 2.x |
+| DataFaker | 2.x |
+
+---
+
 # Estrutura
 
 ```text
@@ -55,31 +68,35 @@ juice-shop-api
 O framework foi desenvolvido seguindo uma arquitetura em camadas.
 
 ```text
-                Test
+                     Tests
 
-                 │
+                       │
 
-                 ▼
+         ┌─────────────┼─────────────┐
 
-              Service
+         │                           │
 
-                 │
+     Factory                     DTOs
 
-                 ▼
+         │                           │
 
-              Client
+         └─────────────┬─────────────┘
 
-                 │
+                       ▼
 
-                 ▼
+                  Service Layer
 
-          RequestSpecs
+                       ▼
 
-                 │
+                   Client Layer
 
-                 ▼
+                       ▼
 
-            REST API
+             Request Specification
+
+                       ▼
+
+                    REST API
 ```
 
 ---
@@ -168,7 +185,7 @@ Classes utilitárias utilizadas pelo framework.
 
 ---
 
-# Funcionalidades
+# Cenários Automatizados
 
 Atualmente o framework possui cenários para:
 
@@ -186,6 +203,26 @@ Incluindo validações de:
 - JSON Schema
 - Autenticação
 - Tratamento de erros
+
+---
+
+# Cobertura dos Testes
+
+| Endpoint | GET | POST | PUT | DELETE | Positivo | Negativo |
+|----------|:---:|:----:|:---:|:------:|:--------:|:--------:|
+| Login | ✅ | — | — | — | ✅ | ✅ |
+| Products | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+Validações realizadas:
+
+- Status Code
+- Headers
+- Body
+- JSON Schema
+- Autenticação
+- Payload inválido
+- Método HTTP inválido
+- Campos obrigatórios
 
 ---
 
@@ -278,12 +315,26 @@ Workflow:
 
 ---
 
-# Próximas evoluções
+# Design Patterns Utilizados
 
-- Testes de Basket
-- Testes de Checkout
-- Testes de Cupons
-- Dados dinâmicos utilizando Faker
+O framework utiliza alguns padrões de projeto para facilitar manutenção e escalabilidade.
+
+- DTO Pattern
+- Factory Pattern
+- Service Layer
+- Client Layer
+- Singleton (TokenManager)
+- Builder Pattern (RequestSpecification)
+- Centralização de Configurações
+
+---
+
+# Melhorias Futuras
+
+- Testes para Basket
+- Testes para Address
+- Testes para Orders
 - Execução paralela
 - Dashboard Allure
 - Integração com SonarQube
+- Publicação automática de relatórios
